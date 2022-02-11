@@ -26,6 +26,9 @@ undo(){
         local cmdtodo="uninstall"
         local cmd=${lastcmd//install/uninstall}
         eval ${cmd} && brew autoremove
+    elif [[ $lastcmd == *"git commit"* ]]; then
+        local cmd="git reset HEAD^ --soft"
+        eval ${cmd}
     fi
 }
 # Use alternate vim marks [[[ and ]]] as the original ones can

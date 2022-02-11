@@ -5,5 +5,7 @@ A package to undo last command in zsh
 
 ```shell
 brew install python
+# or
+git commit -m "update"
 undo
 ```
