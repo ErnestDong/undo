@@ -21,7 +21,7 @@ Plugins[UNDO_DIR]="${0:h}"
 autoload -Uz template-script
 
 undo(){
-    local lastcmd=`history | tail -n1|head -n1 | gsed 's/ [0-9]* //'`
+    local lastcmd=`history | tail -n1|head -n1 | gsed 's/[0-9]* //'`
     if [[ $lastcmd == *"brew install "* ]]; then
         local cmdtodo="uninstall"
         local cmd=${lastcmd//install/uninstall}
@@ -29,6 +29,8 @@ undo(){
         eval ${cmd} && brew autoremove
     elif [[ $lastcmd == *"git commit "* ]]; then
         git reset HEAD^ --soft
+    elif [[ $lastcmd == *"launchctl load"* ]]; then
+		eval ${lastcmd//load/unload}
     elif [[ $lastcmd == *"cd "* ]]; then
         cd -
     fi
